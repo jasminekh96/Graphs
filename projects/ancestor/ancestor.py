@@ -14,4 +14,39 @@ class Stack():
 
 
 def earliest_ancestor(ancestors, starting_node):
-    pass
+    # Create a q/stack and enqueue starting vertex
+    stack = Stack()
+    visited = set()
+    stack.push(starting_node)
+    first = -1
+    # While stack has ancestors and queue is not empty:
+    while stack.size() > 0:
+        # pop the first vertex/ancestor
+        vertex = stack.pop()
+        # if ancestor not visited
+        if vertex not in visited:
+            # mark as visited
+            visited.add(vertex)
+            print(visited) 
+
+
+
+            for ancestor in ancestors:
+                
+                if ancestor[1] == vertex:
+                    stack.push(ancestor[0])
+
+                    if first == -1:
+                        first = ancestor[0]                    
+                    parents = []
+
+                    for anc in ancestors:
+                        if anc[1] == vertex:
+                            parents.append(anc[0])
+
+                            if len(parents) == 1:
+                                first = anc[0]
+                            else:
+                                if first > anc[0]:
+                                    first = anc[0]
+    return first
